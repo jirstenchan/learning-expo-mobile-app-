@@ -1,16 +1,22 @@
 import { useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
+type CustomerRowProps = {
+  name: string;
+  balance: number;
+  lastPaid: string;
+  onPress: () => void;
+};
 
-type CustomerRowProps = { name: string; balance: number; lastPaid: string };
-
-export function CustomerRow({ name, balance, lastPaid }: CustomerRowProps) {
+export function CustomerRow({
+  name,
+  balance,
+  lastPaid,
+  onPress,
+}: CustomerRowProps) {
   const [expanded, setExpanded] = useState(false);
   return (
-    <Pressable
-      onPress={() => setExpanded(!expanded)}
-      style={{ paddingVertical: 14, borderBottomWidth: 1, borderColor: "#ddd" }}
-    >
+    <Pressable onPress={onPress} style={styles.row}>
       <View
         style={{
           paddingVertical: 14,
@@ -25,3 +31,9 @@ export function CustomerRow({ name, balance, lastPaid }: CustomerRowProps) {
     </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  row: {
+    width: "100%",
+  },
+});
